@@ -20,3 +20,8 @@ log = { version = "^0.4", features = ["std", "serde"] }
 subst = "^0.3.0"
 libsyslog = "^0.1.1"
 pwd = "1"
+
+# A PAM module loads into sudo, login and sshd: on macOS it must not depend on
+# a Homebrew OpenSSL that an upgrade can rename or remove.
+[target.'cfg(target_os = "macos")'.dependencies]
+openssl = { version = "^0.10", features = ["vendored"] }
